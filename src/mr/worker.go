@@ -51,11 +51,11 @@ func Worker(mapf func(string, string) []KeyValue,
 		assignedTask := Task{}
 		// Worker向Master请求一个Task
 		call("Master.GiveMeTask", &request, &assignedTask)
-		fmt.Println(assignedTask)
+		// fmt.Println(assignedTask)
 		if !assignedTask.NoTask {
 			// NoTask == false, 说明有Task可以执行
 			// 请求到的Task可能是Map Task，也可能是Reduce Task，为了区分，reply里肯定要携带Task类别信息
-			fmt.Println("I got a job!")
+			// fmt.Println("I got a job!")
 			if assignedTask.TaskType == 0 {
 				// Map Task
 				// 如果是Map Task，就需要读取对应的文件，然后调用Map function
@@ -63,7 +63,7 @@ func Worker(mapf func(string, string) []KeyValue,
 				filename := assignedTask.MapTaskFileName
 				R := assignedTask.R
 				mapTaskID := assignedTask.TaskID
-				fmt.Printf("Start processing Map Task, id: %v, filename: %v\n", mapTaskID, filename)
+				// fmt.Printf("Start processing Map Task, id: %v, filename: %v\n", mapTaskID, filename)
 				// 创建nReduce个文件
 				ofiles := []*os.File{}
 				for i := 1; i <= R; i++ {
@@ -107,7 +107,7 @@ func Worker(mapf func(string, string) []KeyValue,
 				M := assignedTask.M
 				reduceTaskID := assignedTask.TaskID
 				intermediate := []KeyValue{}
-				fmt.Printf("Start processing Reduce Task, id: %v", reduceTaskID)
+				// fmt.Printf("Start processing Reduce Task, id: %v", reduceTaskID)
 
 				// 读取所有的intermediate file中对的kv pairs
 				for i := 1; i <= M; i++ {
@@ -125,8 +125,6 @@ func Worker(mapf func(string, string) []KeyValue,
 						intermediate = append(intermediate, kv)
 					}
 					file.Close()
-					// 这个intermediate file已经没用了，删掉！
-					os.Remove(filename)
 				}
 				sort.Sort(ByKey(intermediate))
 				// 为了确保nobody obeserves partially written files当Worker执行到一半崩溃了
@@ -165,11 +163,16 @@ func Worker(mapf func(string, string) []KeyValue,
 				response := Response{}
 				// Worker向Master请求一个Task
 				call("Master.TaskCompleted", &request, &response)
+				for i := 1; i <= M; i++ {
+					filename := "mr-" + strconv.Itoa(i) + "-" + strconv.Itoa(reduceTaskID)
+					// 这个intermediate file已经没用了，删掉！
+					os.Remove(filename)
+				}
 			}
 		}
 		// 因为需要等待所有的Map Task执行结束后，才可以执行Reduce Task，
 		// 所以Worker可能需要等待，可以在两次request间隔中进行`time.Sleep()`来等待
-		fmt.Println("Waiting 2 seconds to request another task...")
+		// fmt.Println("Waiting 2 seconds to request another task...")
 		time.Sleep(2 * time.Second)
 	}
 }
@@ -197,6 +200,6 @@ func call(rpcname string, args interface{}, reply interface{}) bool {
 		return true
 	}
 
-	fmt.Println(err)
+	// fmt.Println(err)
 	return false
 }

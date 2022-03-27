@@ -7,7 +7,7 @@ import (
 	"net/rpc"
 	"os"
 	"sync"
-	"fmt"
+	// "fmt"
 	"time"
 )
 
@@ -53,7 +53,7 @@ func (m *Master) GiveMeTask(args *Request, reply *Task) error {
 				time.Sleep(10 * time.Second)
 				m.Mu.Lock()
 				defer m.Mu.Unlock()
-				if m.RState[id] != 2 {
+				if m.RState[id] == 1 {
 					m.RState[id] = 0
 				}
 			}(m, i)
@@ -78,7 +78,7 @@ func (m *Master) GiveMeTask(args *Request, reply *Task) error {
 				time.Sleep(10 * time.Second)
 				m.Mu.Lock()
 				defer m.Mu.Unlock()
-				if m.MState[id] != 2 {
+				if m.MState[id] == 1 {
 					m.MState[id] = 0
 				}
 			}(m, i)
@@ -102,11 +102,11 @@ func (m *Master) TaskCompleted(args *TaskCompletedMessage, reply *Response) erro
 	if taskType == 0 {
 		m.MState[id] = 2
 		m.MCompleted++
-	} else if taskType == 1{
+	} else if taskType == 1 {
 		m.RState[id] = 2
 		m.RCompleted++
 	}
-	fmt.Println(m)
+	// fmt.Println(m)
 
 	return nil
 
@@ -162,7 +162,7 @@ func MakeMaster(files []string, nReduce int) *Master {
 	for i := 1; i <= nReduce; i++ {
 		m.RState[i] = 0 // idle
 	}
-	fmt.Println(m)
+	// fmt.Println(m)
 	m.server()
 	return &m
 }
