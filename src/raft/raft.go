@@ -23,7 +23,6 @@ import "../labrpc"
 import "math/rand"
 import "time"
 
-
 // import "bytes"
 // import "../labgob"
 
@@ -56,7 +55,7 @@ type ApplyMsg struct {
 type LogEntry struct {
 	// each entry contains command for state machine
 	// term when entries was received by leader(从1开始)
-	Command string
+	Command interface{}
 	Index int
 	Term int
 }
@@ -88,7 +87,9 @@ type Raft struct {
 	// volatile state on leaders
 	// 每次选举后都要重新初始化
 	nextIndex []int // 对于每个peer server，下一个将被发送给它的log entry的索引。初始化为leader的最后一个log的index+1
-	matchIndex[] int // 对于每一个peer server，最大的已经被replicated的log entry的索引。初始化为0.
+	matchIndex[] int // 对于每一个peer server，最大的已经被replicated的log entry的索引。初始化为-1.
+
+	applyCh chan ApplyMsg
 }
 
 // return currentTerm and whether this server
@@ -202,6 +203,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 			if len(rf.log) != 0 {
 				if args.LastLogIndex != -1 {
 					// 当前节点有log，并且candidate也有log
+					// election restriction，保证选出来的leader包含所有的committed的logEntries。
 					lastLog := rf.log[len(rf.log)-1]
 					if args.LastLogTerm < lastLog.Term {
 						reply.VoteGranted = false
@@ -248,25 +250,67 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
-	rf.timerStartTime = time.Now()
+	// general heartbeat logic
+
 	if rf.currentTerm > args.Term {
+		// 让发送方知道现在最新的term：你那个任期早就结束了，大哥:/
 		reply.Success = false
 		reply.Term = rf.currentTerm
 		return
 	}
-
-	if args.Entries == nil {
-		// 心跳
+	DPrintf("Handle Heartbeat: Raft(%d), args.PrevLogIndex:%d, len(rf.log):%d", rf.me, args.PrevLogIndex, len(rf.log))
+	DPrintf("Raft(%d) received the entries %v", rf.me, args.Entries)
+	DPrintf("Raft(%d) received heartbeat arguments: %v", rf.me, args)
+	DPrintf("raft(%d)'s log: %v, commitIndex: %d, lastApplied: %d", rf.me, rf.log, rf.commitIndex, rf.lastApplied)
+	// you get an AppendEntries RPC from the current leader (i.e., if the term in the AppendEntries arguments is outdated, you should not reset your timer)
+	rf.timerStartTime = time.Now()
+	if args.Term > rf.currentTerm {
+		// 发现有比自己term更高的领导，Leader主动卸任，follower就更新一下自己的currentTerm
 		rf.state = Follower
 		rf.currentTerm = args.Term
 		rf.votedFor = -1
 		rf.timerStartTime = time.Now()
-
-		reply.Term = rf.currentTerm
+	}
+	// entries为空的时候，prevLogIndex可能是-1，也可能不是。
+	// args>PrevLogIndex为-1的时候，肯定是正确的，因为这将相当于把所有的Leader's entries给它。
+	if args.PrevLogIndex >= len(rf.log) {
 		reply.Success = false
 		return
-	} else {
+	}
+	if args.PrevLogIndex != -1 {
+		tempLog := rf.log[args.PrevLogIndex]
+		if tempLog.Term != args.PrevLogTerm {
+			reply.Success = false
+			// truncate
+			rf.log = rf.log[:args.PrevLogIndex]
+			return
+		}
+	}
+	reply.Success = true
+	// Append
+	if args.Entries != nil {
+		DPrintf("Server: %d. before append: %v", rf.me, rf.log)
+		// 可能PrevLogIndex和Term都相同，但是Follower后面的并没有被truncate，这里得确认一下。
+		rf.log = rf.log[:args.PrevLogIndex+1] // 哈哈哈 TestFailNoAgree2B加上这一行就解决了
+		rf.log = append(rf.log, args.Entries...)
+		DPrintf("Server: %d. after append: %v %v", rf.me, rf.log, reply.Success)
+	}
+	// Update commitIndex
+	if rf.commitIndex < args.LeaderCommit {
+		if len(rf.log) - 1 <= args.LeaderCommit {
+			rf.commitIndex = len(rf.log) - 1
+		} else {
+			rf.commitIndex = args.LeaderCommit
+		}
+	}
 
+	if rf.commitIndex > rf.lastApplied {
+		for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
+			applyMsg := ApplyMsg{true, rf.log[i].Command, i+1}
+			rf.applyCh <- applyMsg
+		}
+		rf.lastApplied = rf.commitIndex
+		DPrintf("Applied: raft(%d)'s log: %v, commitIndex: %d", rf.me, rf.log, rf.commitIndex)
 	}
 }
 
@@ -295,9 +339,18 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	isLeader := true
 
 	// Your code here (2B).
-
-
-	return index, term, isLeader
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	term = rf.currentTerm
+	isLeader = (rf.state == Leader)
+	if isLeader {
+		index = len(rf.log)
+		newLog := LogEntry{command, index, term}
+		DPrintf("Leader (%d) Start, %v", rf.me, newLog)
+		rf.log = append(rf.log, newLog)
+	}
+	// 如果这个log被commit了，要通过`ApplyCh`通知KV Server
+	return index+1, term, isLeader
 }
 
 //
@@ -344,6 +397,12 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.currentTerm = 0
 	rf.votedFor = -1
 	rf.timerStartTime = time.Now()
+
+	rf.applyCh = applyCh
+
+	// for log replication
+	rf.commitIndex = -1
+	rf.lastApplied = -1
 	go rf.LeaderElection()
 	DPrintf("Raft节点 %d 初始化", rf.me)
 	// initialize from state persisted before a crash
@@ -366,6 +425,7 @@ func (rf *Raft) LeaderElection() {
 		if timerRunning > time.Duration(electionTimeout) * time.Millisecond {
 			// 如果是Leader的话，啥也不做，这个timeout和他已经没有关系了。
 			if rf.state != Leader {
+				DPrintf("%d不是Leader", rf.me)
 				// 不是Leader的话， electionTimeout结束了要开始选举。
 				// 更新一下electionTimeout为另一个随机值
 				electionTimeout = rand.Intn(maxElectionTimeout-minElectionTimeout) + minElectionTimeout
@@ -397,12 +457,18 @@ func (rf *Raft) KickoffElection() {
 	numVote := 1
 	rf.mu.Unlock()
 
+	rf.nextIndex = make([]int, len(rf.peers))
+	rf.matchIndex = make([]int, len(rf.peers))
 	// 开始给其他节点发送RequestVote RPC
 	for i := 0; i < len(rf.peers); i++ {
+		// 初始化nextIndex和matchIndex
+		rf.nextIndex[i] = len(rf.log)
+		rf.matchIndex[i] = -1
 		if i == rf.me {
 			// 不用给自己发送RequestVote
 			continue
 		}
+
 		go func(p int) {
 			reply := RequestVoteReply{}
 			DPrintf("%d 发送 RequestVote 给 %d", rf.me, p)
@@ -426,7 +492,7 @@ func (rf *Raft) KickoffElection() {
 				if numVote > len(rf.peers) / 2 && rf.state == Candidate {
 					// 拿到超过一半的选票了，成为Leader，开始给小弟们发送心跳
 					rf.state = Leader
-					DPrintf("%d 成为term: %d的Leader了！", rf.me, rf.currentTerm)
+					DPrintf("%d 成为term: %d的Leader了！", rf.me, rf.currentTerm)	
 					go rf.SendHeartBeats()
 				}
 			}
@@ -437,6 +503,8 @@ func (rf *Raft) KickoffElection() {
 func (rf *Raft) SendHeartBeats() {
 	DPrintf("Leader: %d 开始发心跳", rf.me)
 	for {
+		DPrintf("Leader（%d）'s log: %v, commitIndex: %d", rf.me, rf.log, rf.commitIndex)
+
 		for i := 0; i < len(rf.peers); i++ {
 			if i == rf.me {
 				continue
@@ -453,6 +521,36 @@ func (rf *Raft) SendHeartBeats() {
 		}
 		// 发送心跳的间隔时间
 		time.Sleep(time.Duration(100)*time.Millisecond)
+
+		// 检查一下有没有可以commit的数据
+		rf.mu.Lock()
+
+
+		for N := len(rf.log) - 1; N > rf.commitIndex && rf.log[N].Term == rf.currentTerm; N-- {
+			cnt := 1 // leader肯定自身有这个log
+			for i := 0; i < len(rf.peers); i++ {
+				if i == rf.me {
+					continue
+				}
+				if rf.matchIndex[i] >= N {
+					cnt++
+				}
+			}
+			if cnt > len(rf.peers) / 2 {
+				rf.commitIndex = N
+				DPrintf("Leader commit : %d", N)
+				break
+			}
+		}
+		if rf.commitIndex > rf.lastApplied {
+			for i := rf.lastApplied + 1; i <= rf.commitIndex; i++ {
+				applyMsg := ApplyMsg{true, rf.log[i].Command, i+1}
+				rf.applyCh <- applyMsg
+			}
+			rf.lastApplied = rf.commitIndex
+		}
+		rf.mu.Unlock()
+
 	}
 
 }
@@ -463,26 +561,35 @@ func (rf *Raft) HeartBeat(server int) {
 		// 多check一下总是好的，如果不是Leader了就不能发心跳了。
 		return
 	}
-	// 获取该节点的最后一个log entry
-	var lastLogEntry LogEntry
-	if len(rf.log) == 0 {
-		lastLogEntry = LogEntry{Index:-1, Term:-1}
-	} else {
-		lastLogEntry = rf.log[len(rf.log)-1]
+	// 根据nextIndex[server]求出PrevLogIndex, PrevLogTerm, Entries
+	DPrintf("len(rf.nextIndex):%d, server:%d", len(rf.nextIndex), server)
+	DPrintf("Leader: %d, nextIndex: %v", rf.me, rf.nextIndex)
+	next := rf.nextIndex[server]
+	var entries []LogEntry
+	var prevLogEntry LogEntry
+
+	if next > 0 {
+		prevLogEntry = rf.log[next-1]
+	} else if next == 0 {
+		prevLogEntry = LogEntry{Index:-1, Term:-1}
 	}
+	entries = rf.log[next:]
+
 	args := AppendEntriesArgs {
 		Term: rf.currentTerm, // 当前任期
 		LeaderId: rf.me, // LeaderId
-		PrevLogIndex: lastLogEntry.Index,
-		PrevLogTerm: lastLogEntry.Term,
-		Entries: nil, // entry为空 === 心跳
-		LeaderCommit: -1, // 心跳不需要commitIndex
+		PrevLogIndex: prevLogEntry.Index,
+		PrevLogTerm: prevLogEntry.Term,
+		Entries: entries, // entries和leaderCommit得根据真实情况来，通过nextIndex[]数组来得出Entries的值。
+		LeaderCommit: rf.commitIndex,
 	}
 	rf.mu.Unlock()
 
 	reply := AppendEntriesReply{}
 	DPrintf("%d 发心跳给 %d", rf.me, server)
 	ok := rf.SendAppendEntries(server, &args, &reply)
+	// Note：注意发送心跳后，PrevLogIndex和PrevLogTerm可能已经修改了
+	// 所以不能通过这些值来update nextIndex[]和matchIdnex[]
 	if !ok {
 		return
 	}
@@ -494,6 +601,16 @@ func (rf *Raft) HeartBeat(server int) {
 		rf.currentTerm = reply.Term
 		rf.votedFor = -1
 		rf.timerStartTime = time.Now()
+		return
+	}
+	if reply.Success {
+		// 如果成功的话，更新nextIndex和matchIndex
+		rf.matchIndex[server] = prevLogEntry.Index + len(entries)
+		rf.nextIndex[server] = rf.matchIndex[server] + 1
+		DPrintf("SUCCESS：server:%v; %v, %v, matchIndex: %v, nextIndex: %v", server, prevLogEntry.Index, len(entries), rf.matchIndex, rf.nextIndex)
+	} else {
+		// 失败的话，decrement nextIndex and retry
+		rf.nextIndex[server]--
 		return
 	}
 }

@@ -1,128 +1,964 @@
-2022/04/03 11:15:17 Raft节点 0 初始化
-2022/04/03 11:15:17 Raft节点 1 初始化
-2022/04/03 11:15:17 Raft节点 2 初始化
-111
-Test (2A): election after network failure ...
-hi, i'm here0
-2022/04/03 11:15:17 2 开始term: 1的选举
-2022/04/03 11:15:17 2 发送 RequestVote 给 1
-2022/04/03 11:15:17 2 发送 RequestVote 给 0
-2022/04/03 11:15:17 2 成为term: 1的Leader了！
-2022/04/03 11:15:17 0 开始term: 2的选举
-2022/04/03 11:15:17 0 发送 RequestVote 给 2
-2022/04/03 11:15:17 0 发送 RequestVote 给 1
-2022/04/03 11:15:17 0 成为term: 2的Leader了！
-2022/04/03 11:15:17 1 开始term: 3的选举
-2022/04/03 11:15:17 1 发送 RequestVote 给 2
-2022/04/03 11:15:17 1 发送 RequestVote 给 0
-2022/04/03 11:15:18 1 开始term: 4的选举
-2022/04/03 11:15:18 1 发送 RequestVote 给 2
-2022/04/03 11:15:18 1 发送 RequestVote 给 0
-2022/04/03 11:15:18 1 开始term: 5的选举
-2022/04/03 11:15:18 1 发送 RequestVote 给 2
-2022/04/03 11:15:18 1 发送 RequestVote 给 0
-2022/04/03 11:15:18 1 开始term: 6的选举
-2022/04/03 11:15:18 1 发送 RequestVote 给 2
-2022/04/03 11:15:18 1 发送 RequestVote 给 0
-2022/04/03 11:15:18 1 开始term: 7的选举
-2022/04/03 11:15:18 1 发送 RequestVote 给 2
-2022/04/03 11:15:18 1 发送 RequestVote 给 0
-2022/04/03 11:15:18 1 开始term: 8的选举
-2022/04/03 11:15:18 1 发送 RequestVote 给 2
-2022/04/03 11:15:18 1 发送 RequestVote 给 0
-2022/04/03 11:15:19 1 开始term: 9的选举
-2022/04/03 11:15:19 1 发送 RequestVote 给 2
-2022/04/03 11:15:19 1 发送 RequestVote 给 0
-2022/04/03 11:15:19 1 开始term: 10的选举
-2022/04/03 11:15:19 1 发送 RequestVote 给 2
-2022/04/03 11:15:19 1 发送 RequestVote 给 0
-2022/04/03 11:15:19 1 开始term: 11的选举
-2022/04/03 11:15:19 1 发送 RequestVote 给 2
-2022/04/03 11:15:19 1 发送 RequestVote 给 0
-2022/04/03 11:15:19 1 开始term: 12的选举
-2022/04/03 11:15:19 1 发送 RequestVote 给 2
-2022/04/03 11:15:19 1 发送 RequestVote 给 0
-2022/04/03 11:15:20 1 开始term: 13的选举
-2022/04/03 11:15:20 1 发送 RequestVote 给 2
-2022/04/03 11:15:20 1 发送 RequestVote 给 0
-2022/04/03 11:15:20 1 开始term: 14的选举
-2022/04/03 11:15:20 1 发送 RequestVote 给 2
-2022/04/03 11:15:20 1 发送 RequestVote 给 0
-2022/04/03 11:15:20 1 开始term: 15的选举
-2022/04/03 11:15:20 1 发送 RequestVote 给 2
-2022/04/03 11:15:20 1 发送 RequestVote 给 0
-2022/04/03 11:15:20 1 开始term: 16的选举
-2022/04/03 11:15:20 1 发送 RequestVote 给 2
-2022/04/03 11:15:20 1 发送 RequestVote 给 0
-2022/04/03 11:15:21 1 开始term: 17的选举
-2022/04/03 11:15:21 1 发送 RequestVote 给 2
-2022/04/03 11:15:21 1 发送 RequestVote 给 0
-2022/04/03 11:15:21 1 开始term: 18的选举
-2022/04/03 11:15:21 1 发送 RequestVote 给 2
-2022/04/03 11:15:21 1 发送 RequestVote 给 0
-2022/04/03 11:15:21 1 开始term: 19的选举
-2022/04/03 11:15:21 1 发送 RequestVote 给 2
-2022/04/03 11:15:21 1 发送 RequestVote 给 0
-2022/04/03 11:15:21 1 开始term: 20的选举
-2022/04/03 11:15:21 1 发送 RequestVote 给 2
-2022/04/03 11:15:21 1 发送 RequestVote 给 0
-2022/04/03 11:15:22 1 开始term: 21的选举
-2022/04/03 11:15:22 1 发送 RequestVote 给 2
-2022/04/03 11:15:22 1 发送 RequestVote 给 0
-2022/04/03 11:15:22 1 开始term: 22的选举
-2022/04/03 11:15:22 1 发送 RequestVote 给 2
-2022/04/03 11:15:22 1 发送 RequestVote 给 0
-2022/04/03 11:15:22 1 开始term: 23的选举
-2022/04/03 11:15:22 1 发送 RequestVote 给 2
-2022/04/03 11:15:22 1 发送 RequestVote 给 0
-2022/04/03 11:15:22 1 开始term: 24的选举
-2022/04/03 11:15:22 1 发送 RequestVote 给 2
-2022/04/03 11:15:22 1 发送 RequestVote 给 0
-2022/04/03 11:15:22 1 开始term: 25的选举
-2022/04/03 11:15:22 1 发送 RequestVote 给 2
-2022/04/03 11:15:22 1 发送 RequestVote 给 0
-2022/04/03 11:15:23 1 开始term: 26的选举
-2022/04/03 11:15:23 1 发送 RequestVote 给 0
-2022/04/03 11:15:23 1 发送 RequestVote 给 2
-2022/04/03 11:15:23 1 开始term: 27的选举
-2022/04/03 11:15:23 1 发送 RequestVote 给 2
-2022/04/03 11:15:23 1 发送 RequestVote 给 0
-2022/04/03 11:15:23 1 开始term: 28的选举
-2022/04/03 11:15:23 1 发送 RequestVote 给 2
-2022/04/03 11:15:23 1 发送 RequestVote 给 0
-2022/04/03 11:15:23 1 开始term: 29的选举
-2022/04/03 11:15:23 1 发送 RequestVote 给 2
-2022/04/03 11:15:23 1 发送 RequestVote 给 0
-2022/04/03 11:15:24 1 开始term: 30的选举
-2022/04/03 11:15:24 1 发送 RequestVote 给 2
-2022/04/03 11:15:24 1 发送 RequestVote 给 0
-2022/04/03 11:15:24 1 成为term: 30的Leader了！
-2022/04/03 11:15:24 0 开始term: 31的选举
-2022/04/03 11:15:24 0 发送 RequestVote 给 2
-2022/04/03 11:15:24 0 发送 RequestVote 给 1
-2022/04/03 11:15:24 0 开始term: 32的选举
-2022/04/03 11:15:24 0 发送 RequestVote 给 2
-2022/04/03 11:15:24 0 发送 RequestVote 给 1
-2022/04/03 11:15:25 0 开始term: 33的选举
-2022/04/03 11:15:25 0 发送 RequestVote 给 2
-2022/04/03 11:15:25 0 发送 RequestVote 给 1
-2022/04/03 11:15:25 0 开始term: 34的选举
-2022/04/03 11:15:25 0 发送 RequestVote 给 2
-2022/04/03 11:15:25 0 发送 RequestVote 给 1
-2022/04/03 11:15:25 0 开始term: 35的选举
-2022/04/03 11:15:25 0 发送 RequestVote 给 2
-2022/04/03 11:15:25 0 发送 RequestVote 给 1
-2022/04/03 11:15:25 0 开始term: 36的选举
-2022/04/03 11:15:25 0 发送 RequestVote 给 2
-2022/04/03 11:15:25 0 发送 RequestVote 给 1
-2022/04/03 11:15:25 0 开始term: 37的选举
-2022/04/03 11:15:25 0 发送 RequestVote 给 2
-2022/04/03 11:15:25 0 发送 RequestVote 给 1
-2022/04/03 11:15:25 0 开始term: 38的选举
-2022/04/03 11:15:25 0 发送 RequestVote 给 2
-2022/04/03 11:15:25 0 发送 RequestVote 给 1
-2022/04/03 11:15:26 0 开始term: 39的选举
-2022/04/03 11:15:26 0 发送 RequestVote 给 2
-2022/04/03 11:15:26 0 发送 RequestVote 给 1
-signal: interrupt
-FAIL	_/Users/yuhaoq/yuhaoq/courses/mit6.824/6.824/src/raft	9.468s
+2022/04/06 09:18:59 Raft节点 0 初始化
+2022/04/06 09:18:59 Raft节点 1 初始化
+2022/04/06 09:18:59 Raft节点 2 初始化
+Test (2B): agreement despite follower disconnection ...
+2022/04/06 09:19:00 0不是Leader
+2022/04/06 09:19:00 0 开始term: 1的选举
+2022/04/06 09:19:00 0 发送 RequestVote 给 2
+2022/04/06 09:19:00 0 发送 RequestVote 给 1
+2022/04/06 09:19:00 1投票给0
+2022/04/06 09:19:00 2投票给0
+2022/04/06 09:19:00 2的重置时间：2022-04-06 09:19:00.04719 -0700 PDT m=+0.165033854
+2022/04/06 09:19:00 1的重置时间：2022-04-06 09:19:00.047141 -0700 PDT m=+0.164984892
+2022/04/06 09:19:00 0 成为term: 1的Leader了！
+2022/04/06 09:19:00 Leader: 0 开始发心跳
+2022/04/06 09:19:00 Leader（0）'s log: [], commitIndex: -1
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 0 0]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 0 0]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:-1, len(rf.log):0
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 -1 -1 [] -1}
+2022/04/06 09:19:00 raft(2)'s log: [], commitIndex: -1, lastApplied: -1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:-1, len(rf.log):0
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 -1 -1 [] -1}
+2022/04/06 09:19:00 raft(1)'s log: [], commitIndex: -1, lastApplied: -1
+2022/04/06 09:19:00 SUCCESS：server:2; -1, 0, matchIndex: [-1 -1 -1], nextIndex: [0 0 0]
+2022/04/06 09:19:00 SUCCESS：server:1; -1, 0, matchIndex: [-1 -1 -1], nextIndex: [0 0 0]
+2022/04/06 09:19:00 Leader (0) Start, {101 0 1}
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: -1
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 0 0]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 0 0]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:-1, len(rf.log):0
+2022/04/06 09:19:00 Raft(1) received the entries [{101 0 1}]
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:-1, len(rf.log):0
+2022/04/06 09:19:00 Raft(2) received the entries [{101 0 1}]
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 -1 -1 [{101 0 1}] -1}
+2022/04/06 09:19:00 raft(1)'s log: [], commitIndex: -1, lastApplied: -1
+2022/04/06 09:19:00 Server: 1. before append: []
+2022/04/06 09:19:00 Server: 1. after append: [{101 0 1}] true
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 -1 -1 [{101 0 1}] -1}
+2022/04/06 09:19:00 raft(2)'s log: [], commitIndex: -1, lastApplied: -1
+2022/04/06 09:19:00 Server: 2. before append: []
+2022/04/06 09:19:00 Server: 2. after append: [{101 0 1}] true
+2022/04/06 09:19:00 SUCCESS：server:1; -1, 1, matchIndex: [-1 0 -1], nextIndex: [0 1 0]
+2022/04/06 09:19:00 SUCCESS：server:2; -1, 1, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Leader commit : 0
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 raft(1)'s log: [{101 0 1}], commitIndex: -1, lastApplied: -1
+2022/04/06 09:19:00 Applied: raft(1)'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: -1, lastApplied: -1
+2022/04/06 09:19:00 Applied: raft(2)'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 SUCCESS：server:1; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 SUCCESS：server:1; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 SUCCESS：server:1; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 SUCCESS：server:1; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 SUCCESS：server:1; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(1) received the entries []
+2022/04/06 09:19:00 Raft(1) received heartbeat arguments: &{1 0 0 1 [] 0}
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 SUCCESS：server:1; 0, 0, matchIndex: [-1 0 0], nextIndex: [0 1 1]
+2022/04/06 09:19:00 map[1:[0]]
+2022/04/06 09:19:00 Leader (0) Start, {102 1 1}
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1} {102 1 1}], commitIndex: 0
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 1]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:00 Raft(2) received the entries [{102 1 1}]
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 0 1 [{102 1 1}] 0}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 Server: 2. before append: [{101 0 1}]
+2022/04/06 09:19:00 Server: 2. after append: [{101 0 1} {102 1 1}] true
+2022/04/06 09:19:00 SUCCESS：server:2; 0, 1, matchIndex: [-1 0 1], nextIndex: [0 1 2]
+2022/04/06 09:19:00 Leader commit : 1
+2022/04/06 09:19:00 Leader（0）'s log: [{101 0 1} {102 1 1}], commitIndex: 1
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 2]
+2022/04/06 09:19:00 0 发心跳给 2
+2022/04/06 09:19:00 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:00 Leader: 0, nextIndex: [0 1 2]
+2022/04/06 09:19:00 0 发心跳给 1
+2022/04/06 09:19:00 Handle Heartbeat: Raft(2), args.PrevLogIndex:1, len(rf.log):2
+2022/04/06 09:19:00 Raft(2) received the entries []
+2022/04/06 09:19:00 Raft(2) received heartbeat arguments: &{1 0 1 1 [] 1}
+2022/04/06 09:19:00 raft(2)'s log: [{101 0 1} {102 1 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:00 Applied: raft(2)'s log: [{101 0 1} {102 1 1}], commitIndex: 1
+2022/04/06 09:19:00 SUCCESS：server:2; 1, 0, matchIndex: [-1 0 1], nextIndex: [0 1 2]
+2022/04/06 09:19:00 Leader (0) Start, {103 2 1}
+2022/04/06 09:19:01 1不是Leader
+2022/04/06 09:19:01 1 开始term: 2的选举
+2022/04/06 09:19:01 1 发送 RequestVote 给 2
+2022/04/06 09:19:01 1 发送 RequestVote 给 0
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 1
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 2]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 2]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:1, len(rf.log):2
+2022/04/06 09:19:01 Raft(2) received the entries [{103 2 1}]
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 1 1 [{103 2 1}] 1}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1}], commitIndex: 1, lastApplied: 1
+2022/04/06 09:19:01 Server: 2. before append: [{101 0 1} {102 1 1}]
+2022/04/06 09:19:01 Server: 2. after append: [{101 0 1} {102 1 1} {103 2 1}] true
+2022/04/06 09:19:01 SUCCESS：server:2; 1, 1, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 Leader commit : 2
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 1, lastApplied: 1
+2022/04/06 09:19:01 Applied: raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 1不是Leader
+2022/04/06 09:19:01 1 开始term: 3的选举
+2022/04/06 09:19:01 1 发送 RequestVote 给 2
+2022/04/06 09:19:01 1 发送 RequestVote 给 0
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 1不是Leader
+2022/04/06 09:19:01 1 开始term: 4的选举
+2022/04/06 09:19:01 1 发送 RequestVote 给 2
+2022/04/06 09:19:01 1 发送 RequestVote 给 0
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 1不是Leader
+2022/04/06 09:19:01 1 开始term: 5的选举
+2022/04/06 09:19:01 1 发送 RequestVote 给 2
+2022/04/06 09:19:01 1 发送 RequestVote 给 0
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:01 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 2
+2022/04/06 09:19:01 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:01 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:01 0 发心跳给 1
+2022/04/06 09:19:01 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:01 Raft(2) received the entries []
+2022/04/06 09:19:01 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:01 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:01 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:02 0 发心跳给 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:02 0 发心跳给 1
+2022/04/06 09:19:02 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:02 Raft(2) received the entries []
+2022/04/06 09:19:02 Raft(2) received heartbeat arguments: &{1 0 2 1 [] 2}
+2022/04/06 09:19:02 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:02 SUCCESS：server:2; 2, 0, matchIndex: [-1 0 2], nextIndex: [0 1 3]
+2022/04/06 09:19:02 1不是Leader
+2022/04/06 09:19:02 1 开始term: 6的选举
+2022/04/06 09:19:02 1 发送 RequestVote 给 2
+2022/04/06 09:19:02 1 发送 RequestVote 给 0
+2022/04/06 09:19:02 Leader (0) Start, {104 3 1}
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}], commitIndex: 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:02 0 发心跳给 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 3]
+2022/04/06 09:19:02 0 发心跳给 1
+2022/04/06 09:19:02 Handle Heartbeat: Raft(2), args.PrevLogIndex:2, len(rf.log):3
+2022/04/06 09:19:02 Raft(2) received the entries [{104 3 1}]
+2022/04/06 09:19:02 Raft(2) received heartbeat arguments: &{1 0 2 1 [{104 3 1}] 2}
+2022/04/06 09:19:02 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:02 Server: 2. before append: [{101 0 1} {102 1 1} {103 2 1}]
+2022/04/06 09:19:02 Server: 2. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}] true
+2022/04/06 09:19:02 SUCCESS：server:2; 2, 1, matchIndex: [-1 0 3], nextIndex: [0 1 4]
+2022/04/06 09:19:02 Leader commit : 3
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}], commitIndex: 3
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 4]
+2022/04/06 09:19:02 0 发心跳给 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 4]
+2022/04/06 09:19:02 0 发心跳给 1
+2022/04/06 09:19:02 Handle Heartbeat: Raft(2), args.PrevLogIndex:3, len(rf.log):4
+2022/04/06 09:19:02 Raft(2) received the entries []
+2022/04/06 09:19:02 Raft(2) received heartbeat arguments: &{1 0 3 1 [] 3}
+2022/04/06 09:19:02 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}], commitIndex: 2, lastApplied: 2
+2022/04/06 09:19:02 Applied: raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}], commitIndex: 3
+2022/04/06 09:19:02 SUCCESS：server:2; 3, 0, matchIndex: [-1 0 3], nextIndex: [0 1 4]
+2022/04/06 09:19:02 Leader (0) Start, {105 4 1}
+2022/04/06 09:19:02 1不是Leader
+2022/04/06 09:19:02 1 开始term: 7的选举
+2022/04/06 09:19:02 1 发送 RequestVote 给 2
+2022/04/06 09:19:02 1 发送 RequestVote 给 0
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}], commitIndex: 3
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 4]
+2022/04/06 09:19:02 0 发心跳给 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 4]
+2022/04/06 09:19:02 0 发心跳给 1
+2022/04/06 09:19:02 Handle Heartbeat: Raft(2), args.PrevLogIndex:3, len(rf.log):4
+2022/04/06 09:19:02 Raft(2) received the entries [{105 4 1}]
+2022/04/06 09:19:02 Raft(2) received heartbeat arguments: &{1 0 3 1 [{105 4 1}] 3}
+2022/04/06 09:19:02 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}], commitIndex: 3, lastApplied: 3
+2022/04/06 09:19:02 Server: 2. before append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1}]
+2022/04/06 09:19:02 Server: 2. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}] true
+2022/04/06 09:19:02 SUCCESS：server:2; 3, 1, matchIndex: [-1 0 4], nextIndex: [0 1 5]
+2022/04/06 09:19:02 Leader commit : 4
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}], commitIndex: 4
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 5]
+2022/04/06 09:19:02 0 发心跳给 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 5]
+2022/04/06 09:19:02 0 发心跳给 1
+2022/04/06 09:19:02 Handle Heartbeat: Raft(2), args.PrevLogIndex:4, len(rf.log):5
+2022/04/06 09:19:02 Raft(2) received the entries []
+2022/04/06 09:19:02 Raft(2) received heartbeat arguments: &{1 0 4 1 [] 4}
+2022/04/06 09:19:02 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}], commitIndex: 3, lastApplied: 3
+2022/04/06 09:19:02 Applied: raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}], commitIndex: 4
+2022/04/06 09:19:02 SUCCESS：server:2; 4, 0, matchIndex: [-1 0 4], nextIndex: [0 1 5]
+2022/04/06 09:19:02 Leader (0) Start, {106 5 1}
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:2
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 5]
+2022/04/06 09:19:02 0 发心跳给 2
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 0, nextIndex: [0 1 5]
+2022/04/06 09:19:02 0 发心跳给 1
+2022/04/06 09:19:02 Handle Heartbeat: Raft(2), args.PrevLogIndex:4, len(rf.log):5
+2022/04/06 09:19:02 Raft(2) received the entries [{106 5 1}]
+2022/04/06 09:19:02 Raft(2) received heartbeat arguments: &{1 0 4 1 [{106 5 1}] 4}
+2022/04/06 09:19:02 raft(2)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:02 Server: 2. before append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1}]
+2022/04/06 09:19:02 Server: 2. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}] true
+2022/04/06 09:19:02 SUCCESS：server:2; 4, 1, matchIndex: [-1 0 5], nextIndex: [0 1 6]
+2022/04/06 09:19:02 1不是Leader
+2022/04/06 09:19:02 1 开始term: 8的选举
+2022/04/06 09:19:02 1 发送 RequestVote 给 2
+2022/04/06 09:19:02 1 发送 RequestVote 给 0
+2022/04/06 09:19:02 Leader（0）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:02 2不是Leader
+2022/04/06 09:19:02 2 开始term: 9的选举
+2022/04/06 09:19:02 2 发送 RequestVote 给 1
+2022/04/06 09:19:02 2 发送 RequestVote 给 0
+2022/04/06 09:19:02 1投票给2
+2022/04/06 09:19:02 1的重置时间：2022-04-06 09:19:02.788032 -0700 PDT m=+2.906473495
+2022/04/06 09:19:02 0投票给2
+2022/04/06 09:19:02 0的重置时间：2022-04-06 09:19:02.788085 -0700 PDT m=+2.906526267
+2022/04/06 09:19:02 2 成为term: 9的Leader了！
+2022/04/06 09:19:02 Leader: 2 开始发心跳
+2022/04/06 09:19:02 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:02 2 发心跳给 1
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:02 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:02 2 发心跳给 0
+2022/04/06 09:19:02 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):1
+2022/04/06 09:19:02 Raft(1) received the entries []
+2022/04/06 09:19:02 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:02 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:02 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:02 Raft(0) received the entries []
+2022/04/06 09:19:02 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:02 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:02 SUCCESS：server:0; 5, 0, matchIndex: [5 -1 -1], nextIndex: [6 5 6]
+2022/04/06 09:19:02 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 2, nextIndex: [6 5 6]
+2022/04/06 09:19:02 2 发心跳给 1
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:02 Leader: 2, nextIndex: [6 5 6]
+2022/04/06 09:19:02 2 发心跳给 0
+2022/04/06 09:19:02 Handle Heartbeat: Raft(1), args.PrevLogIndex:4, len(rf.log):1
+2022/04/06 09:19:02 Raft(1) received the entries [{106 5 1}]
+2022/04/06 09:19:02 Raft(1) received heartbeat arguments: &{9 2 4 1 [{106 5 1}] 4}
+2022/04/06 09:19:02 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:02 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:02 Raft(0) received the entries []
+2022/04/06 09:19:02 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:02 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:02 SUCCESS：server:0; 5, 0, matchIndex: [5 -1 -1], nextIndex: [6 4 6]
+2022/04/06 09:19:02 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:02 Leader: 2, nextIndex: [6 4 6]
+2022/04/06 09:19:02 2 发心跳给 1
+2022/04/06 09:19:02 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:02 Leader: 2, nextIndex: [6 4 6]
+2022/04/06 09:19:02 2 发心跳给 0
+2022/04/06 09:19:02 Handle Heartbeat: Raft(1), args.PrevLogIndex:3, len(rf.log):1
+2022/04/06 09:19:02 Raft(1) received the entries [{105 4 1} {106 5 1}]
+2022/04/06 09:19:02 Raft(1) received heartbeat arguments: &{9 2 3 1 [{105 4 1} {106 5 1}] 4}
+2022/04/06 09:19:02 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:02 Raft(0) received the entries []
+2022/04/06 09:19:02 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:02 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:02 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:02 SUCCESS：server:0; 5, 0, matchIndex: [5 -1 -1], nextIndex: [6 3 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 3 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 3 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:2, len(rf.log):1
+2022/04/06 09:19:03 Raft(1) received the entries [{104 3 1} {105 4 1} {106 5 1}]
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 2 1 [{104 3 1} {105 4 1} {106 5 1}] 4}
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 -1 -1], nextIndex: [6 3 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 2 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 2 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:1, len(rf.log):1
+2022/04/06 09:19:03 Raft(1) received the entries [{103 2 1} {104 3 1} {105 4 1} {106 5 1}]
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 1 1 [{103 2 1} {104 3 1} {105 4 1} {106 5 1}] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 -1 -1], nextIndex: [6 2 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 1 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 1 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:0, len(rf.log):1
+2022/04/06 09:19:03 Raft(1) received the entries [{102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}]
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 0 1 [{102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}] 4}
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1}], commitIndex: 0, lastApplied: 0
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 Server: 1. before append: [{101 0 1}]
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Server: 1. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}] true
+2022/04/06 09:19:03 Applied: raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 -1 -1], nextIndex: [6 1 6]
+2022/04/06 09:19:03 SUCCESS：server:1; 0, 5, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received the entries []
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received the entries []
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received the entries []
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received the entries []
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received the entries []
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 1
+2022/04/06 09:19:03 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:03 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:03 2 发心跳给 0
+2022/04/06 09:19:03 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 Raft(1) received the entries []
+2022/04/06 09:19:03 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:03 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 Raft(0) received the entries []
+2022/04/06 09:19:03 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:03 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:03 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:03 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 5 1 [] 4}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 SUCCESS：server:1; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 5, 0, matchIndex: [5 5 -1], nextIndex: [6 6 6]
+2022/04/06 09:19:04 Leader (2) Start, {106 6 9}
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 4
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [6 6 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(1) received the entries [{106 6 9}]
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 5 1 [{106 6 9}] 4}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Server: 1. before append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}]
+2022/04/06 09:19:04 Server: 1. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}] true
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:5, len(rf.log):6
+2022/04/06 09:19:04 Raft(0) received the entries [{106 6 9}]
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 5 1 [{106 6 9}] 4}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 SUCCESS：server:1; 5, 1, matchIndex: [5 6 -1], nextIndex: [6 7 6]
+2022/04/06 09:19:04 Server: 0. before append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1}]
+2022/04/06 09:19:04 Server: 0. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}] true
+2022/04/06 09:19:04 SUCCESS：server:0; 5, 1, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 Leader commit : 6
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Applied: raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 4, lastApplied: 4
+2022/04/06 09:19:04 Applied: raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:04 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:04 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:04 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 1
+2022/04/06 09:19:04 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:04 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:04 2 发心跳给 0
+2022/04/06 09:19:04 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(1) received the entries []
+2022/04/06 09:19:04 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:04 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:04 Raft(0) received the entries []
+2022/04/06 09:19:04 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:04 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:04 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:04 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 0, matchIndex: [6 6 -1], nextIndex: [7 7 6]
+2022/04/06 09:19:05 Leader (2) Start, {107 7 9}
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}], commitIndex: 6
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [7 7 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(1) received the entries [{107 7 9}]
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 6 9 [{107 7 9}] 6}
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:6, len(rf.log):7
+2022/04/06 09:19:05 Raft(0) received the entries [{107 7 9}]
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 6 9 [{107 7 9}] 6}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Server: 0. before append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}]
+2022/04/06 09:19:05 Server: 1. before append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9}]
+2022/04/06 09:19:05 Server: 0. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}] true
+2022/04/06 09:19:05 Server: 1. after append: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}] true
+2022/04/06 09:19:05 SUCCESS：server:1; 6, 1, matchIndex: [6 7 -1], nextIndex: [7 8 6]
+2022/04/06 09:19:05 SUCCESS：server:0; 6, 1, matchIndex: [7 7 -1], nextIndex: [8 8 6]
+2022/04/06 09:19:05 Leader commit : 7
+2022/04/06 09:19:05 Leader（2）'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}], commitIndex: 7
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:0
+2022/04/06 09:19:05 Leader: 2, nextIndex: [8 8 6]
+2022/04/06 09:19:05 2 发心跳给 0
+2022/04/06 09:19:05 len(rf.nextIndex):3, server:1
+2022/04/06 09:19:05 Leader: 2, nextIndex: [8 8 6]
+2022/04/06 09:19:05 2 发心跳给 1
+2022/04/06 09:19:05 Handle Heartbeat: Raft(0), args.PrevLogIndex:7, len(rf.log):8
+2022/04/06 09:19:05 Raft(0) received the entries []
+2022/04/06 09:19:05 Raft(0) received heartbeat arguments: &{9 2 7 9 [] 7}
+2022/04/06 09:19:05 raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Handle Heartbeat: Raft(1), args.PrevLogIndex:7, len(rf.log):8
+2022/04/06 09:19:05 Raft(1) received the entries []
+2022/04/06 09:19:05 Raft(1) received heartbeat arguments: &{9 2 7 9 [] 7}
+2022/04/06 09:19:05 Applied: raft(0)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}], commitIndex: 7
+2022/04/06 09:19:05 raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}], commitIndex: 6, lastApplied: 6
+2022/04/06 09:19:05 Applied: raft(1)'s log: [{101 0 1} {102 1 1} {103 2 1} {104 3 1} {105 4 1} {106 5 1} {106 6 9} {107 7 9}], commitIndex: 7
+2022/04/06 09:19:05 SUCCESS：server:0; 7, 0, matchIndex: [7 7 -1], nextIndex: [8 8 6]
+2022/04/06 09:19:05 SUCCESS：server:1; 7, 0, matchIndex: [7 7 -1], nextIndex: [8 8 6]
+  ... Passed --   5.9  3  130   32925    8
+PASS
+ok  	_/Users/yuhaoq/yuhaoq/courses/mit6.824/6.824/src/raft	6.091s
