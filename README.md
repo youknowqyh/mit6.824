@@ -202,6 +202,29 @@ matchIndex is initialized to -1 (i.e., we agree on no prefix)
 因为机器崩溃了之后，重启程序后，肯定需要重跑，再把数据apply到kv server上去。
 Part 2C应该会涉及到这部分，先把这个问题记录下来。
 
+```
+For simplicity, you should save Raft’s persistent state just after any change to that state. The most important thing is that you save persistent state before you make it possible for anything else to observe the new state, i.e., before you send an RPC, reply to an RPC, return from Start(), or apply a command to the state machine.
+
+If a server changes persistent state, but then crashes before it gets the chance to save it, that’s fine – it’s as if the crash happened before the state was changed. However, if the server changes persistent state, makes it visible, and then crashes before it saves it, that’s not fine – forgetting that persistent state may cause it to violate protocol invariants (for example, it could vote for two different candidates in the same term if it forgot votedFor).
+```
+
+TestFigure8Unreliable2C, TestReliableChurn2C过不了啊啊啊啊啊啊，这两个case太难了。得优化log backtracking.
+
+参考：MIT6.824 Lab2 raft中遇到的问题该怎么解决？ - Csomnia的回答 - 知乎
+https://www.zhihu.com/question/63895944/answer/713481675
+
+https://yuerblog.cc/2020/08/16/mit-6-824-distributed-systems-%E5%AE%9E%E7%8E%B0raft-lab2c/
+
+https://thesquareplanet.com/blog/students-guide-to-raft/#an-aside-on-optimizations
+
+https://zhuanlan.zhihu.com/p/464701798
+
+config.go:475: one(7417056184806773601) failed to reach agreement这个就是时间太久了，要实现优化：
+
+```
+You will probably need the optimization that backs up nextIndex by more than one entry at a time. Look at the extended Raft paper starting at the bottom of page 7 and top of page 8 (marked by a gray line). The paper is vague about the details; you will need to fill in the gaps, perhaps with the help of the 6.824 Raft lectures.
+```
+
 #### Lab 2总结
 
 为了管理electionTimer，可以让每个raft实例维护一个变量timerStartTime，然后一个main loop每隔一段时间去check一下running time是否超出election timeout了。
@@ -219,6 +242,76 @@ leader会维护一个`nextIndex[]`数组，它记录了要发送给每个followe
 实际实现中还碰到了很多的坑，比如说如果PrevLogIndex和 PrevLogTerm已经对齐了，但是很有可能follower后面的元素还没有truncate掉，所以再进行append的时候要再做一次truncate。
 
 反正test-driven development，没有测试用例根本不可能写出来啊！！！设计项目的人是怎么想到这些测试用例的啊。
+
+TestReliableChurn2C和TestUnreliableChurn2C有时候过不了。。累了，不改了，就这样吧。
+
+我还是太菜了呀。:(
+
+```
+yuhaoq@yuhaoqdeMacBook-Pro ~/yuhaoq/courses/mit6.824/6.824/src/raft % go test -run 2A
+Test (2A): initial election ...
+  ... Passed --   3.1  3   60   17256    0
+Test (2A): election after network failure ...
+  ... Passed --   4.5  3  144   28601    0
+PASS
+ok      _/Users/yuhaoq/yuhaoq/courses/mit6.824/6.824/src/raft   7.674s
+```
+
+
+```
+yuhaoq@yuhaoqdeMacBook-Pro ~/yuhaoq/courses/mit6.824/6.824/src/raft % go test -run 2B
+Test (2B): basic agreement ...
+  ... Passed --   0.9  3   16    4494    3
+Test (2B): RPC byte count ...
+  ... Passed --   2.4  3   50  114680   11
+Test (2B): agreement despite follower disconnection ...
+  ... Passed --   6.1  3  134   34995    8
+Test (2B): no agreement if too many followers disconnect ...
+  ... Passed --   3.5  5  252   47030    3
+Test (2B): concurrent Start()s ...
+  ... Passed --   0.8  3   16    4618    6
+Test (2B): rejoin of partitioned leader ...
+  ... Passed --   4.0  3  140   32880    3
+Test (2B): leader backs up quickly over incorrect follower logs ...
+  ... Passed --  26.7  5 2424 1834896  103
+Test (2B): RPC counts aren't too high ...
+  ... Passed --   2.1  3   42   12426   12
+PASS
+ok      _/Users/yuhaoq/yuhaoq/courses/mit6.824/6.824/src/raft   46.613s
+```
+
+
+```
+yuhaoq@yuhaoqdeMacBook-Pro ~/yuhaoq/courses/mit6.824/6.824/src/raft % go test -run 2C
+Test (2C): basic persistence ...
+  ... Passed --   5.5  3  124   33254    7
+Test (2C): more persistence ...
+  ... Passed --  16.3  5 1064  216884   16
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   1.8  3   36    8997    4
+Test (2C): Figure 8 ...
+  ... Passed --  29.9  5 1160  243003   39
+Test (2C): unreliable agreement ...
+  ... Passed --  18.3  5  780  230242  256
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  19.2  5 1916 1868999  227
+Test (2C): churn ...
+  ... Passed --  16.5  5  796  418912  125
+Test (2C): unreliable churn ...
+  ... Passed --  16.2  5  704  296330  125
+PASS
+ok      _/Users/yuhaoq/yuhaoq/courses/mit6.824/6.824/src/raft   123.902s
+```
+
+不得不说 electionTimeout 的重置一定要各种小心。在 TestPersist22C 中遇到一个这个错误，原因之前每次转为 Follower 就重置 ElectionTimer，实际上应当只有在 Grant a Vote 时重制 timer，收到更高 Term 的消息时会转为 Follower 但不重置 Timer。
+
+Students' Guide 中强调了好几次 Election Timer 的重要性，千千万万不要乱设置：
+
+Make sure you reset your election timer exactly when Figure 2 says you should.
+
+However, if you read Figure 2 carefully, it says：If election timeout elapses without receiving AppendEntries RPC from current leader or granting vote to candidate: convert to candidate.
+
+https://zhuanlan.zhihu.com/p/268647741
 
 ### Lab 3: 
 
