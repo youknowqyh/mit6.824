@@ -242,6 +242,8 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 			}
 			if reply.VoteGranted {
 				// If a Follower receives a RequestVote RPC, and if the Follower decides to grant its vote to that Candidate, the Follower will also reset its election timeout.
+				D2Printf("%d投票给%d", rf.me,args.CandidateId)
+
 				DPrintf("%d投票给%d", rf.me,args.CandidateId)
 				rf.timerStartTime = time.Now()
 				DPrintf("%d的重置时间：%v", rf.me, rf.timerStartTime)
@@ -281,10 +283,11 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		// 让发送方知道现在最新的term：你那个任期早就结束了，大哥:/
 		reply.Success = false
 		reply.Term = rf.currentTerm
+	
 		return
 	}
 	DPrintf("Handle Heartbeat: Raft(%d), args.PrevLogIndex:%d, len(rf.log):%d", rf.me, args.PrevLogIndex, len(rf.log))
-	DPrintf("Raft(%d) received the entries %v", rf.me, args.Entries)
+	// DPrintf("Raft(%d) received the entries %v", rf.me, args.Entries)
 	DPrintf("Raft(%d) received heartbeat arguments: %v", rf.me, args)
 	// DPrintf("raft(%d)'s log: %v, commitIndex: %d, lastApplied: %d", rf.me, rf.log, rf.commitIndex, rf.lastApplied)
 	DPrintf("raft(%d)'s log's length: %v, commitIndex: %d, lastApplied: %d", rf.me, len(rf.log), rf.commitIndex, rf.lastApplied)
@@ -296,8 +299,9 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.state = Follower
 		rf.currentTerm = args.Term
 		rf.votedFor = -1
+		
 		rf.persist()
-		rf.timerStartTime = time.Now()
+		// rf.timerStartTime = time.Now()
 	}
 	// entries为空的时候，prevLogIndex可能是-1，也可能不是。
 	// args>PrevLogIndex为-1的时候，肯定是正确的，因为这将相当于把所有的Leader's entries给它。
@@ -522,8 +526,11 @@ func (rf *Raft) KickoffElection() {
 			break
 		} 
 		// 初始化nextIndex和matchIndex
+		rf.mu.Lock()
 		rf.nextIndex[i] = len(rf.log)
 		rf.matchIndex[i] = -1
+		rf.mu.Unlock()
+
 		if i == rf.me {
 			// 不用给自己发送RequestVote
 			continue
@@ -531,7 +538,7 @@ func (rf *Raft) KickoffElection() {
 
 		go func(p int) {
 			reply := RequestVoteReply{}
-			DPrintf("%d 发送 RequestVote 给 %d", rf.me, p)
+			D2Printf("%d 发送 RequestVote 给 %d", rf.me, p)
 			ok := rf.SendRequestVote(p, &args, &reply)
 			if !ok {
 				return
@@ -566,31 +573,34 @@ func (rf *Raft) KickoffElection() {
 
 func (rf *Raft) SendHeartBeats() {
 	DPrintf("Leader: %d 开始发心跳", rf.me)
+	D2Printf("Leader: %d 开始发心跳", rf.me)
+
 	for {
 		if rf.killed() {
 			break
 		} 
 		// DPrintf("Leader（%d）'s log: %v, commitIndex: %d", rf.me, rf.log, rf.commitIndex)
+		rf.mu.Lock()
 		DPrintf("Leader（%d）'s log's length: %v, commitIndex: %d", rf.me, len(rf.log), rf.commitIndex)
 		for i := 0; i < len(rf.peers); i++ {
 			if i == rf.me {
 				continue
 			}
-			rf.mu.Lock()
 			if rf.state != Leader {
 				rf.mu.Unlock()
 				return
 			}
-			rf.mu.Unlock()
 			// 发送心跳，如果reply.Term > currentTerm，要变回follower
 			go rf.HeartBeat(i)
 
 		}
+		rf.mu.Unlock()
 		// 发送心跳的间隔时间
 		time.Sleep(time.Duration(100)*time.Millisecond)
 
 		// 检查一下有没有可以commit的数据
 		rf.mu.Lock()
+		DPrintf("Leader: %d, nextIndex: %v, matchIndex: %v", rf.me, rf.nextIndex, rf.matchIndex)
 
 
 		for N := len(rf.log) - 1; N > rf.commitIndex && rf.log[N].Term == rf.currentTerm; N-- {
@@ -630,13 +640,13 @@ func (rf *Raft) HeartBeat(server int) {
 	}
 	// 根据nextIndex[server]求出PrevLogIndex, PrevLogTerm, Entries
 	DPrintf("len(rf.nextIndex):%d, server:%d", len(rf.nextIndex), server)
-	DPrintf("Leader: %d, nextIndex: %v", rf.me, rf.nextIndex)
+	DPrintf("Leader: %d, nextIndex: %v, next: %d", rf.me, rf.nextIndex, rf.nextIndex[server])
 	next := rf.nextIndex[server]
 	var entries []LogEntry
 	var prevLogEntry LogEntry
 
 	if next > 0 {
-		D2Printf("Leader: %d, log长度: %d, next: %d", rf.me, len(rf.log), next)
+		DPrintf("Leader: %d, log: %d, next: %d", rf.me, len(rf.log), next)
 		prevLogEntry = rf.log[next-1]
 	} else if next == 0 {
 		prevLogEntry = LogEntry{Index:-1, Term:-1}
@@ -668,8 +678,8 @@ func (rf *Raft) HeartBeat(server int) {
 		rf.state = Follower
 		rf.currentTerm = reply.Term
 		rf.votedFor = -1
-		rf.timerStartTime = time.Now()
 		rf.persist()
+		rf.timerStartTime = time.Now()
 		return
 	}
 	if reply.Success {
