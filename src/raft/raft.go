@@ -151,6 +151,8 @@ func (rf *Raft) readPersist(data []byte) {
 	//   rf.xxx = xxx
 	//   rf.yyy = yyy
 	// }
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	r := bytes.NewBuffer(data)
 	d := labgob.NewDecoder(r)
 
@@ -203,6 +205,8 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	// 如果当前server的votedFor是null，那么直接投票给他，return true
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+
+	defer rf.persist()
 	if rf.currentTerm > args.Term {
 		reply.Term = rf.currentTerm
 		reply.VoteGranted = false
@@ -217,13 +221,13 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 				rf.currentTerm = args.Term
 				rf.timerStartTime = time.Now()
 			}
-			rf.persist()
+			// rf.persist()
 		}
 
 		if rf.votedFor == -1 || rf.votedFor == args.CandidateId {
 			reply.VoteGranted = true
 			rf.votedFor = args.CandidateId
-			rf.persist()
+			// rf.persist()
 			if len(rf.log) != 0 {
 				if args.LastLogIndex != -1 {
 					// 当前节点有log，并且candidate也有log
@@ -275,6 +279,8 @@ type AppendEntriesReply struct {
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
+
+	defer rf.persist()
 	// general heartbeat logic
 
 	if rf.currentTerm > args.Term {
@@ -296,7 +302,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.state = Follower
 		rf.currentTerm = args.Term
 		rf.votedFor = -1
-		rf.persist()
+		// rf.persist()
 		rf.timerStartTime = time.Now()
 	}
 	// entries为空的时候，prevLogIndex可能是-1，也可能不是。
@@ -346,8 +352,8 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 	}
 	// Update commitIndex
 	if rf.commitIndex < args.LeaderCommit {
-		if len(rf.log) - 1 <= args.LeaderCommit {
-			rf.commitIndex = len(rf.log) - 1
+		if args.PrevLogIndex + len(args.Entries) < args.LeaderCommit {
+			rf.commitIndex = args.PrevLogIndex + len(args.Entries) 
 		} else {
 			rf.commitIndex = args.LeaderCommit
 		}
@@ -454,6 +460,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.commitIndex = -1
 	rf.lastApplied = -1
 	// initialize from state persisted before a crash
+	atomic.StoreInt32(&rf.dead, 0)
 	rf.readPersist(persister.ReadRaftState())
 	go rf.LeaderElection()
 	DPrintf("Raft节点 %d 初始化", rf.me)
@@ -510,13 +517,17 @@ func (rf *Raft) KickoffElection() {
 		lastLogEntry = rf.log[len(rf.log)-1]
 	}
 	args := RequestVoteArgs{rf.currentTerm, rf.me, lastLogEntry.Index, lastLogEntry.Term}
-	// 当然要先给自己投一票了 :/
-	numVote := 1
 	rf.mu.Unlock()
 
+	// 开始给其他节点发送RequestVote RPC
+
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 	rf.nextIndex = make([]int, len(rf.peers))
 	rf.matchIndex = make([]int, len(rf.peers))
-	// 开始给其他节点发送RequestVote RPC
+	// 当然要先给自己投一票了 :/
+	numVote := 1
+
 	for i := 0; i < len(rf.peers); i++ {
 		if rf.killed() {
 			break
@@ -544,7 +555,7 @@ func (rf *Raft) KickoffElection() {
 				rf.state = Follower
 				rf.currentTerm = reply.Term
 				rf.votedFor = -1
-				// rf.timerStartTime = time.Now()
+				rf.timerStartTime = time.Now()
 				rf.persist()
 				return
 			}
@@ -553,6 +564,7 @@ func (rf *Raft) KickoffElection() {
 				if numVote > len(rf.peers) / 2 && rf.state == Candidate {
 					// 拿到超过一半的选票了，成为Leader，开始给小弟们发送心跳
 					rf.state = Leader
+					rf.timerStartTime = time.Now()
 					DPrintf("%d 成为term: %d的Leader了！", rf.me, rf.currentTerm)
 
 					D2Printf("%d 成为term: %d的Leader了！", rf.me, rf.currentTerm)
@@ -571,7 +583,7 @@ func (rf *Raft) SendHeartBeats() {
 			break
 		} 
 		// DPrintf("Leader（%d）'s log: %v, commitIndex: %d", rf.me, rf.log, rf.commitIndex)
-		DPrintf("Leader（%d）'s log's length: %v, commitIndex: %d", rf.me, len(rf.log), rf.commitIndex)
+		// DPrintf("Leader（%d）'s log's length: %v, commitIndex: %d", rf.me, len(rf.log), rf.commitIndex)
 		for i := 0; i < len(rf.peers); i++ {
 			if i == rf.me {
 				continue
