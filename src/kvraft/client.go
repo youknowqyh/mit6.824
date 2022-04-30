@@ -8,6 +8,8 @@ import "math/big"
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
+
+	leader int // 肯定得记录一下leader的id
 }
 
 func nrand() int64 {
@@ -21,6 +23,10 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	// You'll have to add code here.
+
+	// 随机选择一个server作为leader
+	// 如果Clerk请求的server不是leader，该server会拒绝请求，然后告诉Clerk谁是leader
+	// 如果请求超时了，Clerk会重新选择一个server作为leader
 	return ck
 }
 

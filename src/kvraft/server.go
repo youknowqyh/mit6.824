@@ -35,11 +35,34 @@ type KVServer struct {
 	maxraftstate int // snapshot if log grows this big
 
 	// Your definitions here.
+	data map[string]string
 }
 
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
+
+	// 得确认一下是不是leader啊
+	// 万一不是的话肯定返回Err。
+	term, isLeader := kv.rf.GetState()
+	if !isLeader {
+		reply.Err = ErrWrongLeader
+		rf.mu.Lock()
+		reply.Value = rf.LeaderId
+		rf.mu.Unlock() 
+		return nil
+	}
+	val, ok := kv.data[args.Key]
+	if ok {
+		reply.Err = OK
+		reply.Value = val
+	} else {
+		reply.Err = ErrNoKey
+		reply.Value = ""
+	}
+	return nil
 }
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
@@ -97,5 +120,22 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 
 	// You may need initialization code here.
 
+	// 要初始化什么呢？
+	// Server就是提供Get, Put, Append操作。
+	// Put和Get操作都要避免重复请求。
+	// 每个server还要知道自己是不是leader
 	return kv
+}
+
+
+func (kv *KVServer) apply(index int, cmd interface{}) {
+	a.mutex.Lock()
+	switch cmd := cmd.(type) {
+		case GetArgs:
+			// do the get
+			// see who was listening for this index
+			// poke them all with the result of the operation
+
+	}
+	a.mutex.Unlock()
 }

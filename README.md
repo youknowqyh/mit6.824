@@ -317,7 +317,50 @@ https://zhuanlan.zhihu.com/p/268647741
 
 build a key/value service on top of Raft
 
-### Lab 4:
+两个部分，key/value service 和 log compaction
 
-"shard" your service over multiple replicated state machines for higher performance
- 
+Clerk不知道哪个kvserver是Raft Leader，如果Clerk请求给错误的Server或者无法请求，Clerk会重新发送请求给一个不同的kvserver。
+
+如果kv service进行了对该commit操作，leader会作出响应。
+
+但如果commit失败了（leader被替换了），server会报错，Clerk会进行retry
+
+当Raft提交commit后，server要执行`Op` command。
+
+只有当server是part of a majority时，才能执行Get()，
+
+Clerk多次发送RPC multiple times，要保证re-send doesn't result in the servers executing the request twice.
+
+> This means that your client-facing RPC methods shuold simply submit the client's operation to Raft, and then wait for that operation to be applied by this "applier loop"
+
+如果client发送`APPEND`请求到服务器，但是没有得到response，他会重新发送给另一台server，server需要确定APPEND操作没有被执行两次。Solution: unique identifier for each client request so that you can recognize if you have seen, and more importantly, applied, a particular operation in the past. This state needs to be a part of your state machine so that all your Raft servers eliminate the same duplicates. One simple way and fairly efficient one is to give each client a unique identifier, and then have them tag each request with a monotonically increasing sequence number. 
+
+each client has a unique identifier 
+each request with a monotonically increasing seqeuence number
+server keeps tracks of the latest sequence number if has seen for each client, and simply ignores any operation that it has already seen.
+
+艹，开始写的有点弄不懂他是怎么build up connection的。想了一会发现其实server和application server没关系啊。比如说有5台服务器，就先通过RPC register这五台。
+
+每个server上分别运行一个kv server application，每个kv server和client都可以通过rpc请求每台服务器。
+
+可以参考kv.go，单机版的。
+
+
+Client启动时，会随机选择一个server作为leader
+如果Clerk请求的server不是leader，该server会拒绝请求，然后告诉Clerk谁是leader
+如果请求超时了，Clerk会重新选择一个server作为leader
+
+为了避免duplication request，每个client都有个自己的unique identifier，（the state machine tracks the latest serial number processed for each client, along with the associated response).. 
+
+我的问题是，server保存着每个client最新的sequence number，但这个server崩溃了之后，别的server成为leader后，别的server怎么知道有没有执行过这个命令呢？
+
+把这个信息也存在raft里？感觉不是这么搞的。raft应该只存放log吧。
+把他作为volatile state如何 0.0 感觉可以这么搞。
+
+linearizable reads must not return stale data. Raft handles this by having each leader commit a blank no-op entry into the log at the start of its term
+
+
+
+摆烂了，直接开抄吧。感觉自己的脑子想不出来。
+
+https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab2.md

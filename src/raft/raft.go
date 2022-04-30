@@ -90,6 +90,8 @@ type Raft struct {
 	matchIndex[] int // 对于每一个peer server，最大的已经被replicated的log entry的索引。初始化为-1.
 
 	applyCh chan ApplyMsg
+
+	LeaderId int
 }
 
 // return currentTerm and whether this server
@@ -304,6 +306,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 		rf.votedFor = -1
 		// rf.persist()
 		rf.timerStartTime = time.Now()
+		rf.LeaderId =  args.LeaderId
 	}
 	// entries为空的时候，prevLogIndex可能是-1，也可能不是。
 	// args>PrevLogIndex为-1的时候，肯定是正确的，因为这将相当于把所有的Leader's entries给它。
@@ -565,6 +568,7 @@ func (rf *Raft) KickoffElection() {
 					// 拿到超过一半的选票了，成为Leader，开始给小弟们发送心跳
 					rf.state = Leader
 					rf.timerStartTime = time.Now()
+					rf.LeaderId = rf.me
 					DPrintf("%d 成为term: %d的Leader了！", rf.me, rf.currentTerm)
 
 					D2Printf("%d 成为term: %d的Leader了！", rf.me, rf.currentTerm)
