@@ -365,46 +365,10 @@ linearizable reads must not return stale data. Raft handles this by having each 
 
 https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab2.md
 
-https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab3.md
+> Another issue many had (often immediately after fixing the issue above), was that, upon receiving a heartbeat, they would truncate the follower’s log following prevLogIndex, and then append any entries included in the AppendEntries arguments. This is also not correct. We can once again turn to Figure 2:
+> 许多人遇到的另一个问题（通常是在修复了上述问题之后）是，在收到心跳时，他们会在prevLogIndex之后截断跟随者的日志，然后追加AppendEntries参数中包括的任何条目。这也是不正确的。我们可以再一次转向图2：
+> 这里的if很关键。如果跟随者拥有领导者发送的所有条目，跟随者必须不截断其日志。任何跟随领导者发送的条目的元素都必须被保留。这是因为我们可能从领导者那里收到了一个过时的AppendEntries RPC，而截断日志将意味着 "收回 "我们可能已经告诉领导者我们的日志中的条目。
 
-https://github.com/Ray-Eldath/MIT6.824/tree/raft
+我艹。怪不得直接错了。。。
 
-
-### Client
-
-Clerk有cid, leader属性
-
-MakeClerk的时候要生成一个随机值作为cid
-
-每次putAppend请求要携带参数ClientId和RequestId，RequestId是一个随机数。
-
-Get请求先获取leader，然后调用RPC，如果返回OK，那么返回值，否则要更新下一个Leader。
-
-PutAppend请求也差不多
-
-都有for循环，直到操作成功。
-
-
-KVServer首先有一个kv map存储key-value pair
-也有对应的mutex
-
-然后要存储每个client的cid
-记录lastAppied。
-
-PutAppend操作时会为当前command创建一个channel
-当成功apply得时候，向ch传值来通知完成操作。
-
-apply的时候会判断该请求是否重复，如果重复就退出，如果成功，就执行对应的操作，并更新lastApplied。
-
-
-为了实现线性一致，还要引入Lease机制，每个Leader必须申请一个Lease（获得Lease得条件是在心跳时得到majority vote）。
-
-为了避免stale read，还必须在一开始commit一个no-op log，才可以执行读取或写操作。
-
-Snapshotting的实现方法就是判断nextLogIndex是否小于当前log列表第一条log得index，如果是，说明要被replicated的数据在snapshot里，所以要installSnapshot一下。
-
-https://github.com/Ray-Eldath/MIT6.824/blob/optimized-2021/src/raft/raft.go 谢谢你，我的超人
-
-snapshot消息也需要server来apply。install snapshot前先更新raft state，然后再更新application server里的东西。
-
-Snapshot需要保存state和snapshot。InstallSnapshotRPC只需要传递snapshot就行。state是保存在每个raft server里的。
+然后记得一开始加一个空的entry，不然会被边界判断搞到崩溃的。
