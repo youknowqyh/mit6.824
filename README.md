@@ -364,3 +364,47 @@ linearizable reads must not return stale data. Raft handles this by having each 
 摆烂了，直接开抄吧。感觉自己的脑子想不出来。
 
 https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab2.md
+
+https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab3.md
+
+https://github.com/Ray-Eldath/MIT6.824/tree/raft
+
+
+### Client
+
+Clerk有cid, leader属性
+
+MakeClerk的时候要生成一个随机值作为cid
+
+每次putAppend请求要携带参数ClientId和RequestId，RequestId是一个随机数。
+
+Get请求先获取leader，然后调用RPC，如果返回OK，那么返回值，否则要更新下一个Leader。
+
+PutAppend请求也差不多
+
+都有for循环，直到操作成功。
+
+
+KVServer首先有一个kv map存储key-value pair
+也有对应的mutex
+
+然后要存储每个client的cid
+记录lastAppied。
+
+PutAppend操作时会为当前command创建一个channel
+当成功apply得时候，向ch传值来通知完成操作。
+
+apply的时候会判断该请求是否重复，如果重复就退出，如果成功，就执行对应的操作，并更新lastApplied。
+
+
+为了实现线性一致，还要引入Lease机制，每个Leader必须申请一个Lease（获得Lease得条件是在心跳时得到majority vote）。
+
+为了避免stale read，还必须在一开始commit一个no-op log，才可以执行读取或写操作。
+
+Snapshotting的实现方法就是判断nextLogIndex是否小于当前log列表第一条log得index，如果是，说明要被replicated的数据在snapshot里，所以要installSnapshot一下。
+
+https://github.com/Ray-Eldath/MIT6.824/blob/optimized-2021/src/raft/raft.go 谢谢你，我的超人
+
+snapshot消息也需要server来apply。install snapshot前先更新raft state，然后再更新application server里的东西。
+
+Snapshot需要保存state和snapshot。InstallSnapshotRPC只需要传递snapshot就行。state是保存在每个raft server里的。

@@ -189,6 +189,55 @@ func (rf *Raft) readPersist(data []byte) {
 	rf.lastApplied = rf.log[0].Index
 }
 
+/* ==================== Snapshotting Start ========================= */
+func (rf *Raft) CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int, lastIncludedSeq int, snapshot []byte) bool {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
+	if lastIncludedIndex < rf.commitIndex {
+		return false
+	}
+
+	if lastIncludedIndex >= rf.LogTail().Index {
+		rf.log = rf.log[0:1]
+	} else {
+		rf.log = rf.log[rf.LogIndexToSubscript(lastIncludedIndex):]
+	}
+	rf.log[0].Index = lastIncludedIndex
+	rf.log[0].Term = lastIncludedTerm
+	rf.log[0].Seq = lastIncludedSeq
+	rf.log[0].Command = nil
+	rf.commitIndex = lastIncludedIndex
+	rf.lastApplied = lastIncludedIndex
+	rf.persister.SaveStateAndSnapshot(rf.serializeState(), snapshot)
+	return true
+}
+
+// the service says it has created a snapshot that has
+// all info up to and including index. this means the
+// service no longer needs the log through (and including)
+// that index. Raft should now trim its log as much as possible.
+func (rf *Raft) Snapshot(seq int, snapshot []byte) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	for i := len(rf.log) - 1; i >= 0; i-- {
+		entry := rf.log[i]
+		if entry.Seq == seq {
+			rf.log = rf.log[rf.LogIndexToSubscript(entry.Index):]
+			rf.log[0].Command = nil
+			rf.lastApplied = entry.Index
+			rf.commitIndex = Max(rf.commitIndex, entry.Index)
+			if rf.leaseSyncing && rf.lastApplied >= rf.commitIndex {
+				rf.leaseSyncing = false
+			}
+			rf.persister.SaveStateAndSnapshot(rf.serializeState(), snapshot)
+			return
+		}
+	}
+}
+/* ==================== Snapshotting End ========================= */
+
+
 
 /* ==================== Replication Start ========================= */
 func (rf *Raft) DoReplicate(peer int) {
@@ -539,8 +588,6 @@ func (rf *Raft) Sync(peer int, args *AppendEntriesArgs, lease *Lease) {
 		}
 	}
 }
-
-
 
 func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply *InstallSnapshotReply) bool {
 	return rf.peers[server].Call("Raft.InstallSnapshot", args, reply)
