@@ -389,6 +389,7 @@ Replicate的时候在拿到锁后也要判断状态是否是Leader。
 
 有三种情况：
 
+```
 -------
     ------
 
@@ -398,6 +399,7 @@ Replicate的时候在拿到锁后也要判断状态是否是Leader。
 -------------- (outdated AppendEntries, we should keep all the records the follower has accepted from the leader)
   -----
 
+```
 
 应该从左往后遍历entries，直到遍历完，或找到一个term不一致的entry，把它作为分界点，将rf.log在此之后的entries都删掉，然后将剩下的append进去。
 
