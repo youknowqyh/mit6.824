@@ -365,6 +365,8 @@ linearizable reads must not return stale data. Raft handles this by having each 
 
 https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab2.md
 
+
+
 > Another issue many had (often immediately after fixing the issue above), was that, upon receiving a heartbeat, they would truncate the follower’s log following prevLogIndex, and then append any entries included in the AppendEntries arguments. This is also not correct. We can once again turn to Figure 2:
 > 许多人遇到的另一个问题（通常是在修复了上述问题之后）是，在收到心跳时，他们会在prevLogIndex之后截断跟随者的日志，然后追加AppendEntries参数中包括的任何条目。这也是不正确的。我们可以再一次转向图2：
 > 这里的if很关键。如果跟随者拥有领导者发送的所有条目，跟随者必须不截断其日志。任何跟随领导者发送的条目的元素都必须被保留。这是因为我们可能从领导者那里收到了一个过时的AppendEntries RPC，而截断日志将意味着 "收回 "我们可能已经告诉领导者我们的日志中的条目。
@@ -372,3 +374,32 @@ https://github.com/OneSizeFitsQuorum/MIT6.824-2021/blob/master/docs/lab2.md
 我艹。怪不得直接错了。。。
 
 然后记得一开始加一个空的entry，不然会被边界判断搞到崩溃的。
+
+
+# Summary 
+
+总结一下为啥我的raft有问题
+
+首先candidate在请求vote得时候，每个vote协程拿到锁后应该再判断一下是否是Candidate并且是否和args中的Term一致。
+
+
+Replicate的时候在拿到锁后也要判断状态是否是Leader。
+
+通过log consistency check后，在做merge的时候，不应该直接truncate然后append，
+
+有三种情况：
+
+-------
+    ------
+
+-------
+       ------
+
+-------------- (outdated AppendEntries, we should keep all the records the follower has accepted from the leader)
+  -----
+
+
+应该从左往后遍历entries，直到遍历完，或找到一个term不一致的entry，把它作为分界点，将rf.log在此之后的entries都删掉，然后将剩下的append进去。
+
+
+总算找到错误了tmd
