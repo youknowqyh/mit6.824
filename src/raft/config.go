@@ -312,7 +312,6 @@ func (cfg *config) checkOneLeader() int {
 				}
 			}
 		}
-		DPrintf("%v", leaders)
 		lastTermWithLeader := -1
 		for term, leaders := range leaders {
 			if len(leaders) > 1 {

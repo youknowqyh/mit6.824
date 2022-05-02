@@ -2,14 +2,16 @@ package kvraft
 
 import "../labrpc"
 import "crypto/rand"
+import rand2 "math/rand"
 import "math/big"
-
+import "time"
+import "sync/atomic"
+// import "fmt"
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
-	// You will have to modify this struct.
-
-	leader int // 肯定得记录一下leader的id
+	cid int32
+	leader int32
 }
 
 func nrand() int64 {
@@ -22,13 +24,15 @@ func nrand() int64 {
 func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
-	// You'll have to add code here.
-
-	// 随机选择一个server作为leader
-	// 如果Clerk请求的server不是leader，该server会拒绝请求，然后告诉Clerk谁是leader
-	// 如果请求超时了，Clerk会重新选择一个server作为leader
+	ck.cid = rand2.Int31()
 	return ck
 }
+
+func (ck *Clerk) args() Args {
+	return Args{ClientId: ck.cid, RequestId: nrand()}
+}
+
+const RetryInterval = 300 * time.Millisecond
 
 //
 // fetch the current value for a key.
@@ -43,9 +47,21 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // arguments. and reply must be passed as a pointer.
 //
 func (ck *Clerk) Get(key string) string {
-
-	// You will have to modify this function.
-	return ""
+	args := GetArgs{Key: key}
+	leader := atomic.LoadInt32(&ck.leader)
+	for {
+		var reply GetReply
+		ok := ck.servers[leader].Call("KVServer.Get", &args, &reply)
+		if ok {
+			if reply.Err == OK {
+				return reply.Value
+			} else if reply.Err == ErrTimeout {
+				// continue
+			}
+		}
+		leader = ck.nextLeader(leader)
+		time.Sleep(RetryInterval)
+	}
 }
 
 //
@@ -59,7 +75,34 @@ func (ck *Clerk) Get(key string) string {
 // arguments. and reply must be passed as a pointer.
 //
 func (ck *Clerk) PutAppend(key string, value string, op string) {
-	// You will have to modify this function.
+	args := PutAppendArgs{Key: key, Value: value, Args: ck.args()}
+	if op == "Put" {
+		args.Type = PutOp
+	} else {
+		args.Type = AppendOp
+	}
+	leader := atomic.LoadInt32(&ck.leader)
+	for {
+		var reply PutAppendReply
+		// fmt.Printf("[Client] cid:%v, PutAppend: %v\n", ck.cid, args)
+		ok := ck.servers[leader].Call("KVServer.PutAppend", &args, &reply)
+
+		if ok {
+			if reply.Err == OK {
+				return
+			} else if reply.Err == ErrTimeout {
+				// continue
+			}
+		}
+		leader = ck.nextLeader(leader)
+		time.Sleep(RetryInterval)
+	}
+}
+
+func (ck *Clerk) nextLeader(current int32) int32 {
+	next := (current + 1) % int32(len(ck.servers))
+	atomic.StoreInt32(&ck.leader, next)
+	return next
 }
 
 func (ck *Clerk) Put(key string, value string) {

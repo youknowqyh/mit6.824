@@ -3,10 +3,12 @@ package kvraft
 import (
 	"../labgob"
 	"../labrpc"
-	"log"
 	"../raft"
 	"sync"
 	"sync/atomic"
+	"time"
+	"log"
+	// "fmt"
 )
 
 const Debug = 0
@@ -18,13 +20,6 @@ func DPrintf(format string, a ...interface{}) (n int, err error) {
 	return
 }
 
-
-type Op struct {
-	// Your definitions here.
-	// Field names must start with capital letters,
-	// otherwise RPC will break.
-}
-
 type KVServer struct {
 	mu      sync.Mutex
 	me      int
@@ -33,40 +28,56 @@ type KVServer struct {
 	dead    int32 // set by Kill()
 
 	maxraftstate int // snapshot if log grows this big
+	serversLen int
 
-	// Your definitions here.
-	data map[string]string
+	kv map[string]string
+	kvMu sync.Mutex
+	cid []int32
+	dedup map[int32]interface{}
+	done map[int]chan struct{}
+	doneMu sync.Mutex
+	lastApplied int
 }
 
+const TimeoutInterval = 500 * time.Millisecond
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
-	// Your code here.
-	kv.mu.Lock()
-	defer kv.mu.Unlock()
-
-	// 得确认一下是不是leader啊
-	// 万一不是的话肯定返回Err。
-	term, isLeader := kv.rf.GetState()
-	if !isLeader {
+	if _, isLeader := kv.rf.GetState(); !isLeader {
 		reply.Err = ErrWrongLeader
-		rf.mu.Lock()
-		reply.Value = rf.LeaderId
-		rf.mu.Unlock() 
-		return nil
+		return
 	}
-	val, ok := kv.data[args.Key]
-	if ok {
-		reply.Err = OK
-		reply.Value = val
-	} else {
-		reply.Err = ErrNoKey
-		reply.Value = ""
-	}
-	return nil
+	kv.kvMu.Lock()
+	val := kv.kv[args.Key]
+	kv.kvMu.Unlock()
+	reply.Value, reply.Err = val, OK
 }
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
-	// Your code here.
+
+	if _, isLeader := kv.rf.GetState(); !isLeader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+	op := *args
+	// fmt.Printf("[OP] key:%v, value:%v, args:%v\n", op.Key, op.Value, op.Args)
+
+	i, _, isLeader := kv.rf.Start(op)
+	if !isLeader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+	ch := make(chan struct{}, 1)
+	kv.doneMu.Lock()
+	kv.done[i] = ch
+	kv.doneMu.Unlock()
+	select {
+	case <-ch:
+		reply.Err = OK
+		return
+	case <-time.After(TimeoutInterval):
+		reply.Err = ErrTimeout
+		return
+	}
 }
 
 //
@@ -107,35 +118,76 @@ func (kv *KVServer) killed() bool {
 func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persister, maxraftstate int) *KVServer {
 	// call labgob.Register on structures you want
 	// Go's RPC library to marshall/unmarshall.
-	labgob.Register(Op{})
+	labgob.Register(GetArgs{})
+	labgob.Register(PutAppendArgs{})
 
 	kv := new(KVServer)
 	kv.me = me
 	kv.maxraftstate = maxraftstate
-
-	// You may need initialization code here.
+	kv.serversLen = len(servers)
 
 	kv.applyCh = make(chan raft.ApplyMsg)
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
-
-	// You may need initialization code here.
-
-	// 要初始化什么呢？
-	// Server就是提供Get, Put, Append操作。
-	// Put和Get操作都要避免重复请求。
-	// 每个server还要知道自己是不是leader
+	kv.done = make(map[int]chan struct{})
+	kv.dedup = make(map[int32]interface{})
+	kv.kv = make(map[string]string)
+	
+	go kv.DoApply()
 	return kv
 }
 
 
-func (kv *KVServer) apply(index int, cmd interface{}) {
-	a.mutex.Lock()
-	switch cmd := cmd.(type) {
-		case GetArgs:
-			// do the get
-			// see who was listening for this index
-			// poke them all with the result of the operation
+func (kv *KVServer) DoApply() {
+	for v := range kv.applyCh {
+		if kv.killed() {
+			return
+		}
 
+		if v.CommandValid {
+			kv.apply(v)
+			if _, isLeader := kv.rf.GetState(); !isLeader {
+				continue
+			}
+			if _, ok := v.Command.(PutAppendArgs); ok {
+				kv.doneMu.Lock()
+				ch := kv.done[v.CommandIndex]
+				kv.doneMu.Unlock()
+				if ch != nil {
+					ch <- struct{}{}
+				}
+			}
+		} 
 	}
-	a.mutex.Unlock()
+}
+
+func (kv *KVServer) apply(v raft.ApplyMsg) {
+	if v.CommandIndex <= kv.lastApplied {
+		return
+	}
+	kv.kvMu.Lock()
+	defer kv.kvMu.Unlock()
+	op := v.Command
+	var key string
+	key = key
+	switch args := op.(type) {
+	case GetArgs:
+		key = args.Key
+		kv.lastApplied = v.CommandIndex
+		break
+	case PutAppendArgs:
+		key = args.Key
+		if dup, ok := kv.dedup[args.ClientId]; ok {
+			if putDup, ok := dup.(PutAppendArgs); ok && putDup.RequestId == args.RequestId {
+				break
+			}
+		}
+		if args.Type == PutOp {
+			kv.kv[args.Key] = args.Value
+		} else {
+			kv.kv[args.Key] += args.Value
+		}
+		kv.dedup[args.ClientId] = op
+		kv.lastApplied = v.CommandIndex
+	}
+
 }

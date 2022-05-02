@@ -606,7 +606,6 @@ func TestPersist22C(t *testing.T) {
 		cfg.one(10+index, servers, true)
 		index++
 		leader1 := cfg.checkOneLeader()
-		D2Printf("leader1是：%d", leader1)
 
 		cfg.disconnect((leader1 + 1) % servers)
 		cfg.disconnect((leader1 + 2) % servers)
@@ -618,26 +617,20 @@ func TestPersist22C(t *testing.T) {
 		cfg.disconnect((leader1 + 3) % servers)
 		cfg.disconnect((leader1 + 4) % servers)
 
-		D2Printf("全部离线")
-
 		cfg.start1((leader1 + 1) % servers)
 		cfg.start1((leader1 + 2) % servers)
 		cfg.connect((leader1 + 1) % servers)
 		cfg.connect((leader1 + 2) % servers)
 
 		time.Sleep(RaftElectionTimeout)
-		D2Printf("睡眠结束，%d重开", (leader1 + 3) % servers)
 		cfg.start1((leader1 + 3) % servers)
 		cfg.connect((leader1 + 3) % servers)
-		D2Printf("3个重新上线")
 
 		cfg.one(10+index, servers-2, true)
 		index++
 
 		cfg.connect((leader1 + 4) % servers)
 		cfg.connect((leader1 + 0) % servers)
-		D2Printf("5个重新上线")
-
 	}
 
 	cfg.one(1000, servers, true)
